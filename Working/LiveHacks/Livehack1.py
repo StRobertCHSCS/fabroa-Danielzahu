@@ -3,5 +3,7 @@ print("""
 ┃ This is a Fahrenheit to celsius converter. ┃
 ----------------------------------------------
 """)
-fahrenheit = int(input("Input temperature in degrees fahrenheit: "))
-print((5/9)*(fahrenheit-32), "degrees celsius")
+fahrenheit = float(input("Input temperature in degrees fahrenheit: "))
+celsius = (5/9) * (fahrenheit-32)
+
+print(celsius, "degrees celsius")
