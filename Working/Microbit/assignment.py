@@ -1,7 +1,8 @@
 from microbit import*
 import music
 red_led = pin1
-green_led = pin2
+green_led = pin16
+PIRsensor_pin = pin2
 jingle = [
  'e:2','e:2','e:4',
  'e:2','e:2','e:4',
@@ -37,6 +38,9 @@ otherjingle = [
     'g3', 'b', 'd4', 'g', 'b', 'd', 'g', 'b', 'g3', 'b3', 'd4', 'g', 'b', 'd', 'g', 'b'
 ]
 
+alarm = ['g#4:4', 'c#4:4', 'g#4:4', 'c#4:4', 'g#4:4', 'c#4:4', 'g#4:4', 'c#4:4', 
+'g#4:4', 'c#4:4', 'g#4:4', 'c#4:4', 'g#4:4', 'c#4:4', 'g#4:4', 'c#4:4', 'g#4:4', 
+'c#4:4', 'g#4:4', 'c#4:4', ]
 while True:
     if button_a.is_pressed():
         music.play(jingle,wait=False,loop=True)
@@ -64,6 +68,7 @@ while True:
             sleep(150)
             green_led.write_digital(0)
             sleep(150)
-
-
-
+    elif PIRsensor_pin.read_digital() == 1:
+        music.play(alarm, wait=False, loop=False)
+        display.scroll("Intruder!", delay=90, wait=False, loop=True)
+        break
