@@ -1,8 +1,9 @@
 from microbit import*
 import music
-red_led = pin1
-green_led = pin16
-PIRsensor_pin = pin2
+green_led = pin1
+blue_led = pin14
+red_led = pin2
+PIRsensor_pin = pin15
 jingle = [
  'e:2','e:2','e:4',
  'e:2','e:2','e:4',
@@ -23,24 +24,11 @@ jingle = [
  'd:2', 'c:4'
 ]
 
-otherjingle = [
-    'c4:1', 'e', 'g', 'c5', 'e5', 'g4', 'c5', 'e5', 'c4', 'e', 'g', 'c5', 'e5', 'g4', 'c5', 'e5',
-    'c4', 'd', 'g', 'd5', 'f5', 'g4', 'd5', 'f5', 'c4', 'd', 'g', 'd5', 'f5', 'g4', 'd5', 'f5',
-    'b3', 'd4', 'g', 'd5', 'f5', 'g4', 'd5', 'f5', 'b3', 'd4', 'g', 'd5', 'f5', 'g4', 'd5', 'f5',
-    'c4', 'e', 'g', 'c5', 'e5', 'g4', 'c5', 'e5', 'c4', 'e', 'g', 'c5', 'e5', 'g4', 'c5', 'e5',
-    'c4', 'e', 'a', 'e5', 'a5', 'a4', 'e5', 'a5', 'c4', 'e', 'a', 'e5', 'a5', 'a4', 'e5', 'a5',
-    'c4', 'd', 'f#', 'a', 'd5', 'f#4', 'a', 'd5', 'c4', 'd', 'f#', 'a', 'd5', 'f#4', 'a', 'd5',
-    'b3', 'd4', 'g', 'd5', 'g5', 'g4', 'd5', 'g5', 'b3', 'd4', 'g', 'd5', 'g5', 'g4', 'd5', 'g5',
-    'b3', 'c4', 'e', 'g', 'c5', 'e4', 'g', 'c5', 'b3', 'c4', 'e', 'g', 'c5', 'e4', 'g', 'c5',
-    'b3', 'c4', 'e', 'g', 'c5', 'e4', 'g', 'c5', 'b3', 'c4', 'e', 'g', 'c5', 'e4', 'g', 'c5',
-    'a3', 'c4', 'e', 'g', 'c5', 'e4', 'g', 'c5', 'a3', 'c4', 'e', 'g', 'c5', 'e4', 'g', 'c5',
-    'd3', 'a', 'd4', 'f#', 'c5', 'd4', 'f#', 'c5', 'd3', 'a', 'd4', 'f#', 'c5', 'd4', 'f#', 'c5',
-    'g3', 'b', 'd4', 'g', 'b', 'd', 'g', 'b', 'g3', 'b3', 'd4', 'g', 'b', 'd', 'g', 'b'
-]
 
 alarm = ['g#4:4', 'c#4:4', 'g#4:4', 'c#4:4', 'g#4:4', 'c#4:4', 'g#4:4', 'c#4:4', 
 'g#4:4', 'c#4:4', 'g#4:4', 'c#4:4', 'g#4:4', 'c#4:4', 'g#4:4', 'c#4:4', 'g#4:4', 
-'c#4:4', 'g#4:4', 'c#4:4', ]
+'c#4:4', 'g#4:4', 'c#4:4']
+
 while True:
     if button_a.is_pressed():
         music.play(jingle,wait=False,loop=True)
@@ -71,4 +59,13 @@ while True:
     elif PIRsensor_pin.read_digital() == 1:
         music.play(alarm, wait=False, loop=False)
         display.scroll("Intruder!", delay=90, wait=False, loop=True)
+        while True:
+            red_led.write_digital(1)
+            sleep(100)
+            red_led.write_digital(0)
+            sleep(100)
+            blue_led.write_digital(1)
+            sleep(150)
+            blue_led.write_digital(0)
+            sleep(150)
         break
